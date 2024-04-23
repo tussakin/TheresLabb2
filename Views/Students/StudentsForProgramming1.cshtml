@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Labb2Theres.Models.Student>
+
+@{
+    ViewData["Title"] = "StudentsForProgramming1";
+}
+
+<h1>StudentsForProgramming1</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var student in Model)
+        {
+            <tr>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => student.StudentName)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@student.StudentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@student.StudentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@student.StudentId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

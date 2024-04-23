@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Labb2Theres.Models.Course>
+
+<h1>Course Index</h1>
+
+<p>
+    <a asp-action="Create">Create New Course</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course Title</th>
+            <th>Course Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CourseTitle)</td>
+                <td>@Html.DisplayFor(modelItem => item.CourseDescription)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CourseId">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.CourseId">Details</a> 
+                    <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a> 
+                    <a asp-action="EditCourseTitle" asp-route-courseId="5" asp-route-newTitle="OOP">Change to OOP</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

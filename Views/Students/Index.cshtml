@@ -1,0 +1,129 @@
+﻿@* @model IEnumerable<Labb2Theres.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FkCourseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentYear)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkCourseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentYear.StudentYearId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ *@
+
+                @model IEnumerable<Labb2Theres.Models.Student>
+
+<h1>Student List</h1>
+
+<p>
+    <a asp-action="Create">Create New Student</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().StudentName)
+            </th>
+            <th>
+                Course 1
+            </th>
+            <th>
+                Teachers
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => student.StudentName)</td>
+                <td>
+                    @if (student.Courses != null && student.Courses.Any())
+                    {
+                        @foreach (var course in student.Courses)
+                        {
+                            <span>@course.CourseTitle</span>
+
+                            <br>
+                        }
+                    }
+                    else
+                    {
+                        <span>No courses enrolled.</span>
+                    }
+                </td>
+                <td>
+                    @if (student.Courses != null && student.Courses.Any())
+                    {
+                        @foreach (var course in student.Courses)
+                        {
+                            if (course.Teachers != null && course.Teachers.Any()) 
+                            {
+                                @foreach (var teacher in course.Teachers)
+                                {
+                                    <span>@teacher.TeacherName</span>
+
+                                    <br>
+                                }
+                            }
+                            else
+                            {
+                                <span>No teachers assigned.</span>
+                                <br>
+
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@student.StudentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@student.StudentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@student.StudentId">Delete</a>
+                </td>
+            </tr>
+        }
+<a asp-action="ChangeTeacherForProgramming1" 
+   asp-route-studentId="3" // ID för studenten som ska ändra lärare
+   asp-route-newTeacherName="Tobias">Change teacher from Reidar to Tobias</a>
+    </tbody>
+</table>
+
+
